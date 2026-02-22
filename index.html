@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TrialGuard – Stop Free Trial Abuse Before It Hits Stripe</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Stop free trial abuse right before Stripe billing starts. Protect usage-based SaaS from cost leakage." />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f7f9fc;
+      color: #111;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .trust,
+    .features {
+      text-align: left;
+      max-width: 650px;
+      margin: 30px auto;
+    }
+
+    .trust li,
+    .features li {
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .section-gray {
+      background: #eef2f7;
+      padding: 80px 20px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #5b6df8;
+      color: #fff;
+      padding: 15px 34px;
+      margin-top: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .small-note {
+      font-size: 0.95rem;
+      margin-top: 10px;
+      opacity: 0.75;
+    }
+
+    .footer {
+      padding: 60px 20px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #555;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .demo-box {
+      margin-top: 40px;
+    }
+
+    input {
+      padding: 12px;
+      width: 280px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    .demo-result {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div class="container">
+
+    <h1>
+  Stop Free Trial Abuse<br>
+  Before It Hits Stripe
+</h1>
+
+    <p>
+  A lightweight JS guard that stops abusive signups
+  right before they trigger Stripe billing and burn your API credits.
+</p>
+
+    <ul class="trust">
+  <li>✔ Block abusive signups before they ever reach Stripe</li>
+  <li>✔ Disposable email detection + risk scoring</li>
+  <li>✔ Double-layer protection (JS + server validation)</li>
+  <li>✔ Cancel anytime</li>
+</ul>
+
+	<a id="checkoutBtn"
+   href="https://buy.stripe.com/4gM14p2R85GgfII5vD0Jq00"
+   class="button">
+   Protect My SaaS
+</a>
+
+    <div class="small-note">
+      JS snippet integration · Under 5 minutes
+    </div>
+
+    <!-- DEMO -->
+    <div class="demo-box">
+      <h2>Try the Protection</h2>
+
+      <input type="email" id="email" placeholder="Enter email to simulate" />
+      <button class="button" onclick="simulate()">Start Free Trial</button>
+
+      <div id="result" class="demo-result"></div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-gray">
+    <div class="container">
+
+      <h2>How It Works</h2>
+
+      <ul class="features">
+        <li>✔ Detect disposable & temporary emails instantly</li>
+        <li>✔ Score suspicious users before account creation</li>
+        <li>✔ Block repeat abusers</li>
+        <li>✔ Prevent cost leakage in usage-based SaaS</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="container">
+
+    <h2>$29 / month</h2>
+
+    <p>
+      Up to 5,000 signups · 14-day money-back guarantee
+    </p>
+
+    <p>
+      One abused account can cost more than your monthly fee.
+    </p>
+
+	<a id="checkoutBtn2"
+   href="https://buy.stripe.com/4gM14p2R85GgfII5vD0Jq00"
+   class="button">
+   Get Instant Protection
+</a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>TrialGuard</strong></p>
+    <p>Free trial abuse prevention for early-stage SaaS.</p>
+    <p>support@trialguard.app</p>
+
+    <div>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="refund.html">Refund</a>
+    </div>
+
+    <p style="margin-top:20px;">
+      © 2026 TrialGuard. All rights reserved.
+    </p>
+  </div>
+
+  <script>
+async function callGuard(email) {
+  const res = await fetch("/.netlify/functions/check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email })
+  });
+
+  return res.json();
+}
+
+async function guardCheckout(e) {
+  e.preventDefault();
+
+  const email = prompt("Enter your email before proceeding:");
+  if (!email) {
+    alert("Email required.");
+    return;
+  }
+
+  try {
+    const result = await callGuard(email.toLowerCase());
+
+    if (!result.allow) {
+      alert("🚫 TrialGuard blocked this signup before Stripe.");
+      return;
+    }
+
+    // 通過したらStripeへ
+    window.location.href = e.target.href;
+
+  } catch (err) {
+    alert("Guard check failed. Try again.");
+  }
+}
+
+document.getElementById("checkoutBtn")
+  .addEventListener("click", guardCheckout);
+
+document.getElementById("checkoutBtn2")
+  .addEventListener("click", guardCheckout);
+</script>
+
+</body>
+</html>
