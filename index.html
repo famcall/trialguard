@@ -248,8 +248,7 @@ before they burn your API credits.
     </p>
   </div>
 
-  <!-- いちばん下、</body> の直前にこれを置く -->
-<script>
+  <script>
 (async function () {
   async function callGuard(email) {
     const res = await fetch("/.netlify/functions/check", {
@@ -257,31 +256,38 @@ before they burn your API credits.
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
     });
-    return res.json();
+    const data = await res.json();
+    console.log("guard result:", data);
+    return data;
   }
 
   async function guardCheckout(e) {
     e.preventDefault();
 
+    const href = e.currentTarget.getAttribute("href");
+    console.log("clicked href:", href);
+
     const email = prompt("Enter your email before proceeding:");
+    console.log("input email:", email);
     if (!email) return;
 
     try {
       const result = await callGuard(email.toLowerCase());
+
       if (!result.allow) {
-        alert("🚫 TrialGuard blocked this signup before Stripe.");
+        alert("🚫 blocked: " + (result.reason || "unknown"));
         return;
       }
-      window.location.href = e.currentTarget.getAttribute("href");
+
+      window.location.assign(href); // ← ここで必ず飛ぶ
     } catch (err) {
-      alert("Guard check failed.");
+      console.log("guard error:", err);
+      alert("Guard check failed. See console.");
     }
   }
 
-  const btn1 = document.getElementById("checkoutBtn");
-  const btn2 = document.getElementById("checkoutBtn2");
-  if (btn1) btn1.addEventListener("click", guardCheckout);
-  if (btn2) btn2.addEventListener("click", guardCheckout);
+  document.getElementById("checkoutBtn")?.addEventListener("click", guardCheckout);
+  document.getElementById("checkoutBtn2")?.addEventListener("click", guardCheckout);
 })();
 </script>
 
@@ -289,4 +295,5 @@ before they burn your API credits.
 
 </body>
 </html>
+
 
