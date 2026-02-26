@@ -1,36 +1,20 @@
 (function () {
 
-  async function checkEmail(email) {
-    const res = await fetch("https://trialguard.org/.netlify/functions/check", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email })
-    });
-
-    return res.json();
+  function isDisposable(email) {
+    const blocked = ["tempmail", "10minutemail", "guerrillamail"];
+    return blocked.some(domain => email.includes(domain));
   }
 
-  document.addEventListener("submit", async function (e) {
+  document.addEventListener("submit", function (e) {
     const form = e.target;
-    const emailInput = form.querySelector('input[type="email"]');
-    if (!emailInput) return;
+    const input = form.querySelector('input[type="email"]');
+    if (!input) return;
 
-    e.preventDefault();
+    const email = input.value.toLowerCase();
 
-    const email = emailInput.value.toLowerCase();
-
-    try {
-      const result = await checkEmail(email);
-
-      if (!result.allow) {
-        alert("🚫 TrialGuard blocked this signup.");
-        return;
-      }
-
-      form.submit();
-
-    } catch (err) {
-      alert("Guard check failed.");
+    if (isDisposable(email)) {
+      e.preventDefault();
+      alert("🚫 TrialGuard blocked this signup.");
     }
   });
 
