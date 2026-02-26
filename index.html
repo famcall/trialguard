@@ -202,8 +202,8 @@ before they burn your API credits.
   <p>Paste this line before your signup form:</p>
 
   <pre style="background:#111;color:#fff;padding:20px;border-radius:6px;overflow:auto;">
-&lt;script src="https://trialguard.org/assets/guard.js"&gt;&lt;/script&gt;
-</pre>
+&lt;script src="https://dashing-mooncake-d18334.netlify.app/guard.js"&gt;&lt;/script&gt;
+  </pre>
 
   <p class="small-note">
     That’s it. TrialGuard blocks abusers before Stripe.
@@ -248,42 +248,50 @@ before they burn your API credits.
     </p>
   </div>
 
-	<script>
-(async function () {
-  async function callGuard(email) {
-    const res = await fetch("/.netlify/functions/check", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email })
-    });
-    return res.json();
+  <script>
+async function callGuard(email) {
+  const res = await fetch("/.netlify/functions/check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email })
+  });
+
+  return res.json();
+}
+
+async function guardCheckout(e) {
+  e.preventDefault();
+
+  const email = prompt("Enter your email before proceeding:");
+  if (!email) {
+    alert("Email required.");
+    return;
   }
 
-  async function guardCheckout(e) {
-    e.preventDefault();
+  try {
+    const result = await callGuard(email.toLowerCase());
 
-    const email = prompt("Enter your email before proceeding:");
-    if (!email) return;
-
-    try {
-      const result = await callGuard(email.toLowerCase());
-      if (!result.allow) {
-        alert("🚫 TrialGuard blocked this signup before Stripe.");
-        return;
-      }
-      window.location.href = e.currentTarget.href; // OKならStripeへ
-    } catch (err) {
-      alert("Guard check failed.");
+    if (!result.allow) {
+      alert("🚫 TrialGuard blocked this signup before Stripe.");
+      return;
     }
-  }
 
-  const btn1 = document.getElementById("checkoutBtn");
-  const btn2 = document.getElementById("checkoutBtn2");
-  if (btn1) btn1.addEventListener("click", guardCheckout);
-  if (btn2) btn2.addEventListener("click", guardCheckout);
-})();
+    // 通過したらStripeへ
+    window.location.href = e.target.href;
+
+  } catch (err) {
+    alert("Guard check failed. Try again.");
+  }
+}
+
+document.getElementById("checkoutBtn")
+  .addEventListener("click", guardCheckout);
+
+document.getElementById("checkoutBtn2")
+  .addEventListener("click", guardCheckout);
 </script>
+
+<script src="/guard.js"></script>
 
 </body>
 </html>
-
