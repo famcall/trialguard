@@ -276,8 +276,9 @@ async function guardCheckout(e) {
       return;
     }
 
-    // 通過したらStripeへ
-    window.location.href = e.target.href;
+    const a = e.target.closest("a");
+if (!a) return;
+window.location.href = a.href;
 
   } catch (err) {
     alert("Guard check failed. Try again.");
@@ -295,3 +296,4 @@ document.getElementById("checkoutBtn2")
 
 </body>
 </html>
+
