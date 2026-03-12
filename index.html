@@ -4,7 +4,10 @@
   <title>TrialGuard – Stop API Credit Burn From Trial Abusers</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stop free trial abuse right before Stripe billing starts. Protect usage-based SaaS from cost leakage." />
+  <meta
+    name="description"
+    content="Stop free trial abuse right before Stripe billing starts. Protect usage-based SaaS from cost leakage."
+  />
 
   <style>
     body {
@@ -68,8 +71,11 @@
       margin-top: 30px;
       font-weight: 600;
       text-decoration: none;
+      border: none;
       border-radius: 6px;
       transition: 0.2s ease;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     .button:hover {
@@ -110,11 +116,32 @@
       border: 1px solid #ddd;
       border-radius: 6px;
       margin-right: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
     }
 
     .demo-result {
       margin-top: 15px;
       font-weight: 600;
+      min-height: 24px;
+    }
+
+    .demo-result.ok {
+      color: #0f766e;
+    }
+
+    .demo-result.ng {
+      color: #b91c1c;
+    }
+
+    .demo-result.neutral {
+      color: #374151;
+    }
+
+    pre {
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     @media (max-width: 600px) {
@@ -124,48 +151,53 @@
 
       input {
         width: 100%;
+        margin-right: 0;
         margin-bottom: 10px;
+      }
+
+      .button {
+        width: 100%;
       }
     }
   </style>
 </head>
 
 <body>
-
   <!-- HERO -->
   <div class="container">
+    <h1>
+      Stop API Credit Burn<br />
+      Before Stripe Checkout
+    </h1>
 
-   <h1>
-Stop API Credit Burn<br>
-Before Stripe Checkout
-</h1>
+    <p style="margin-top:20px;font-weight:600;">
+      If your free trial triggers API or AI token costs,
+      every fake signup costs you real money.
+    </p>
 
-<p style="margin-top:20px;font-weight:600;">
-If your free trial triggers API or AI token costs,
-every fake signup costs you real money.
-</p>
-
-<p>
-Built for usage-based SaaS that can’t afford abusive free trials.
-</p>
+    <p>
+      Built for usage-based SaaS that can’t afford abusive free trials.
+    </p>
 
     <ul class="trust">
-  <li>✔ Block abusive free trials before Stripe checkout</li>
-  <li>✔ Disposable email detection</li>
-  <li>✔ Double-layer protection (JS + server validation)</li>
-  <li>✔ Cancel anytime</li>
-</ul>
+      <li>✔ Block abusive free trials before Stripe checkout</li>
+      <li>✔ Disposable email detection</li>
+      <li>✔ Double-layer protection (JS + server validation)</li>
+      <li>✔ Cancel anytime</li>
+    </ul>
 
-	<a id="checkoutBtn"
-   href="https://buy.stripe.com/4gM14p2R85GgfII5vD0Jq00"
-   class="button">
-   Protect My SaaS
-</a>
+    <a
+      id="checkoutBtn"
+      href="https://buy.stripe.com/fZudRb4Zg2u4eEE4rz0Jq02"
+      class="button"
+    >
+      Protect My SaaS
+    </a>
 
-<div class="small-note">
-  One abusive trial can cost more than your monthly plan.
-Stop the loss before it starts.
-  </div>
+    <div class="small-note">
+      One abusive trial can cost more than your monthly plan.
+      Stop the loss before it starts.
+    </div>
 
     <div class="small-note">
       JS snippet integration · Under 5 minutes
@@ -173,51 +205,50 @@ Stop the loss before it starts.
 
     <!-- DEMO -->
     <div class="demo-box">
-  <h2>Try the Protection</h2>
+      <h2>Try the Protection</h2>
 
-  <form action="https://example.com" method="POST">
-    <input type="email" name="email" placeholder="Enter email to simulate" required />
-    <button type="submit" class="button">
-      Start Free Trial
-    </button>
-  </form>
-　
-</div>
+      <input
+        type="email"
+        id="demoEmail"
+        placeholder="Enter email to simulate"
+      />
+      <button type="button" class="button" id="demoBtn">
+        Start Free Trial
+      </button>
 
+      <div id="demoResult" class="demo-result neutral"></div>
+    </div>
   </div>
 
   <!-- HOW IT WORKS -->
-<div class="section-gray">
-  <div class="container">
-    <h2>How It Works</h2>
+  <div class="section-gray">
+    <div class="container">
+      <h2>How It Works</h2>
 
-    <ul class="features">
-      <li>✔ Detect disposable & temporary emails</li>
-<li>✔ Block abusive trials before Stripe checkout</li>
-<li>✔ Protect usage-based SaaS from cost leakage</li>
-    </ul>
+      <ul class="features">
+        <li>✔ Detect disposable & temporary emails</li>
+        <li>✔ Block abusive trials before Stripe checkout</li>
+        <li>✔ Protect usage-based SaaS from cost leakage</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<!-- INSTALL -->
-<div class="container">
-  <h2>Install in 10 seconds</h2>
+  <!-- INSTALL -->
+  <div class="container">
+    <h2>Install in 10 seconds</h2>
 
-  <p>Paste this line before your signup form:</p>
+    <p>Paste this line before your signup form:</p>
 
-  <pre style="background:#111;color:#fff;padding:20px;border-radius:6px;overflow:auto;">
-&lt;script src="https://dashing-mooncake-d18334.netlify.app/guard.js"&gt;&lt;/script&gt;
-  </pre>
+    <pre style="background:#111;color:#fff;padding:20px;border-radius:6px;overflow:auto;">&lt;script src="https://dashing-mooncake-d18334.netlify.app/guard.js"&gt;&lt;/script&gt;</pre>
 
-  <p class="small-note">
-    That’s it. TrialGuard blocks abusers before Stripe.
-  </p>
-</div>
+    <p class="small-note">
+      That’s it. TrialGuard blocks abusers before Stripe.
+    </p>
+  </div>
 
   <!-- PRICING -->
   <div class="container">
-
-    <h2>$29 / month</h2>
+    <h2>$39 / month</h2>
 
     <p>
       Up to 5,000 signups · 14-day money-back guarantee
@@ -227,21 +258,22 @@ Stop the loss before it starts.
       One abused account can cost more than your monthly fee.
     </p>
 
-	  <p style="font-weight:600;">
-If it blocks just one abusive trial per month, it pays for itself.
-</p>
+    <p style="font-weight:600;">
+      If it blocks just one abusive trial per month, it pays for itself.
+    </p>
 
-	  <p class="small-note">
-No false positives on common domains like Gmail or Outlook.
-Only disposable domains are blocked.
-</p>
+    <p class="small-note">
+      No false positives on common domains like Gmail or Outlook.
+      Only disposable domains are blocked.
+    </p>
 
-	<a id="checkoutBtn2"
-   href="https://buy.stripe.com/4gM14p2R85GgfII5vD0Jq00"
-   class="button">
-   Get Instant Protection
-</a>
-
+    <a
+      id="checkoutBtn2"
+      href="https://buy.stripe.com/fZudRb4Zg2u4eEE4rz0Jq02"
+      class="button"
+    >
+      Get Instant Protection
+    </a>
   </div>
 
   <!-- FOOTER -->
@@ -262,52 +294,88 @@ Only disposable domains are blocked.
   </div>
 
   <script>
-async function callGuard(email) {
-  const res = await fetch("/.netlify/functions/check", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email })
-  });
+    async function callGuard(email) {
+      const res = await fetch("/.netlify/functions/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
 
-  return res.json();
-}
+      if (!res.ok) {
+        throw new Error("Guard request failed");
+      }
 
-async function guardCheckout(e) {
-  e.preventDefault();
-
-  const email = prompt("Enter your email before proceeding:");
-  if (!email) {
-    alert("Email required.");
-    return;
-  }
-
-  try {
-    const result = await callGuard(email.toLowerCase());
-
-    if (!result.allow) {
-      alert("🚫 TrialGuard blocked this signup before Stripe.");
-      return;
+      return res.json();
     }
 
-    const a = e.target.closest("a");
-if (!a) return;
-window.location.href = a.href;
+    function setDemoResult(message, type) {
+      const resultBox = document.getElementById("demoResult");
+      resultBox.textContent = message;
+      resultBox.className = "demo-result " + type;
+    }
 
-  } catch (err) {
-    alert("Guard check failed. Try again.");
-  }
-}
+    async function runDemo() {
+      const emailInput = document.getElementById("demoEmail");
+      const email = emailInput.value.trim().toLowerCase();
 
-document.getElementById("checkoutBtn")
-  .addEventListener("click", guardCheckout);
+      if (!email) {
+        setDemoResult("Email required.", "neutral");
+        return;
+      }
 
-document.getElementById("checkoutBtn2")
-  .addEventListener("click", guardCheckout);
-</script>
+      try {
+        setDemoResult("Checking email...", "neutral");
 
-<script src="/guard.js"></script>
+        const result = await callGuard(email);
 
+        if (result.allow) {
+          setDemoResult("✅ Allowed: this signup would proceed.", "ok");
+        } else {
+          setDemoResult("🚫 Blocked: TrialGuard would stop this signup.", "ng");
+        }
+      } catch (err) {
+        setDemoResult("Guard check failed. Try again.", "neutral");
+      }
+    }
+
+    async function guardCheckout(e) {
+      e.preventDefault();
+
+      const email = prompt("Enter your email before proceeding:");
+      if (!email) {
+        alert("Email required.");
+        return;
+      }
+
+      try {
+        const result = await callGuard(email.toLowerCase());
+
+        if (!result.allow) {
+          alert("🚫 TrialGuard blocked this signup before Stripe.");
+          return;
+        }
+
+        const a = e.currentTarget;
+        if (!a || !a.href) return;
+
+        window.location.href = a.href;
+      } catch (err) {
+        alert("Guard check failed. Try again.");
+      }
+    }
+
+    document.getElementById("checkoutBtn").addEventListener("click", guardCheckout);
+    document.getElementById("checkoutBtn2").addEventListener("click", guardCheckout);
+    document.getElementById("demoBtn").addEventListener("click", runDemo);
+
+    document.getElementById("demoEmail").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        runDemo();
+      }
+    });
+  </script>
+
+  <script src="/guard.js"></script>
 </body>
 </html>
-
-
